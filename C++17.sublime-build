@@ -1,0 +1,27 @@
+{
+    "shell_cmd": "g++ -std=c++17 -O2 -o ${file_base_name} ${file_name}",
+    "file_regex": "^(.*?):([0-9]+):?([0-9]+)?:? error:(.*)$",
+    "shell":true,
+    "working_dir":"${file_path}",
+    "selector":"source.cpp",
+    "variants":[
+        {
+            "name" : "Build and Run",
+            "shell_cmd": "g++ -std=c++17 -O2 -o ${file_base_name} ${file_name} && start cmd.exe /k ${file_base_name}",
+            "shell":true,
+            "working_dir":"${file_path}",
+        },
+        {
+            "name" : "Run",
+            "shell_cmd": "start cmd.exe /k ${file_base_name}",
+            "shell":true,
+            "working_dir":"${file_path}",
+        },
+        {
+            "name" : "Functional (Grader)",
+            "shell_cmd": "g++ -o ${file_base_name} grader.cpp ${file_base_name}.cpp -O2 -lm -std=c++11 && start cmd.exe /k ${file_base_name}",
+            "shell":true,
+            "working_dir":"${file_path}",
+        }
+    ]
+}
